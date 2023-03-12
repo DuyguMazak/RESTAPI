@@ -5,10 +5,10 @@ import json
 app = Flask(__name__)
 
 # MongoDB veritabanına bağlanmak için kullanılacak bağlantı URL'si
-MONGODB_URL = 'mongodb://localhost:27017/london_houses'
+MONGO_URI = 'mongodb://localhost:27017/london_houses'
 
 # MongoClient sınıfı ile MongoDB sunucusuna bağlanma
-client = MongoClient(MONGODB_URL)
+client = MongoClient(MONGO_URI)
 
 # Veritabanına erişim
 db = client['london_houses']
@@ -33,4 +33,4 @@ def get_houses():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0',port=5000)
