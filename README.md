@@ -12,7 +12,7 @@ To run the API, you need to have Docker and Docker Compose installed on your sys
 
 Once you have Docker and Docker Compose installed, follow these steps to run the API:
 
-**1- Clone this repository to your local machine:**
+**1- Clone this repository to your local machine**
 
 **2-Open a terminal window and navigate to the root directory of the project.**
 
