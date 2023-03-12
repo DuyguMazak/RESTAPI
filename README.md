@@ -7,13 +7,12 @@
 
 To run the API, you need to have Docker and Docker Compose installed on your system. If you don't have them yet, please follow the instructions provided in the following links:
 
-    [Docker installation guide](https://docs.docker.com/get-docker/)
-    [Docker Compose installation guide](https://docs.docker.com/compose/install/)
+[Docker installation guide](https://docs.docker.com/get-docker/)
+[Docker Compose installation guide](https://docs.docker.com/compose/install/)
 
 Once you have Docker and Docker Compose installed, follow these steps to run the API:
 
-**1- Clone this repository to your local machine:** 
-git clone https://github.com/yourusername/london-houses-restapi.git
+**1- Clone this repository to your local machine:**
 
 **2-Open a terminal window and navigate to the root directory of the project.**
 
@@ -51,5 +50,6 @@ This will stop and remove the containers and networks created by docker-compose 
 
 
 **Conclusion**
+
 That's it! You now have a working implementation of a RESTful API for serving the London Houses dataset. Feel free to explore the code and experiment with different queries to retrieve the data you need.
 
