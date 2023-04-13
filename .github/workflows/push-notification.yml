@@ -1,14 +1,11 @@
-name: Push Notification
-on:
-  push:
-    branches: [main]
+name: My Custom Action
+
+on: push
 
 jobs:
-  push_notification:
+  my-custom-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Notify on push
-        uses: DuyguMazak/repository-dispatch@v1
-        with:
-          event-type: "push"
-          client-payload: '{"pusher": "${{github.event.pusher.name}}", "ref": "${{github.event.ref }}", "sha": "${{github.event.after}}"}'
+      - name: My Custom Step
+        run: |
+          sed -i 's/foo/bar/g' example.txt
