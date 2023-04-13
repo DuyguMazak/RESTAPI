@@ -5,8 +5,8 @@ on:
 
 jobs:
   push_notification:
-  runs-on: ubuntu-latest
-  steps:
+    runs-on: ubuntu-latest
+    steps:
       - name: Notify on push
         uses: DuyguMazak/repository-dispatch@v1
         with:
