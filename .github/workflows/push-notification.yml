@@ -1,11 +1,21 @@
-name: My Custom Action
-
-on: push
+name: Simple Action
+on:
+  push:
+    branches: [ main ]
 
 jobs:
-  my-custom-job:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: My Custom Step
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build
         run: |
-          sed -i 's/foo/bar/g' example.txt
+          echo "Building the project..."
+          # Add your build commands here
+
+      - name: Test
+        run: |
+          echo "Running tests..."
+          # Add your test commands here
