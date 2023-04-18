@@ -27,7 +27,7 @@ jobs:
         with:
           registry: docker.pkg.github.com
           username: ${{ github.actor }}
-          password: ${{ secrets.PASSWORD}}
+          password: ${{ secrets.TOKEN}}
       - name: Build and push Docker image
         if: steps.skip_ci.outputs.skip != 'true'
         run: |
@@ -37,7 +37,7 @@ jobs:
         if: steps.skip_ci.outputs.skip != 'true'
         uses: actions/create-release@v1.0.0
         env:
-          GITHUB_TOKEN: ${{ secrets.PASSWORD }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           tag_name: ${{ steps.increment_version.outputs.version }}
           release_name: Release ${{ steps.increment_version.outputs.version }}
