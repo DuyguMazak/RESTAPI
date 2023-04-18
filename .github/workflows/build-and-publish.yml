@@ -17,10 +17,10 @@ jobs:
       - name: Increment version number
         id: increment_version
         run: |
-          if [[ ${{ github.event.head_commit.message }} == "[skip ci]" ]]; then
-            echo "::set-output name=VERSION::${{ steps.get_prev_tag.outputs.PREV_TAG }}"
-          else
+          if [ ! "$(grep '\[skip ci\]' <<< "${{ github.event.head_commit.message }}")" ]; then
             echo "::set-output name=VERSION::$(node -p "require('semver').inc(process.env.PREV_TAG, 'patch')")"
+          else
+            echo "::set-output name=VERSION::${{ steps.get_prev_tag.outputs.PREV_TAG }}"
           fi
         env:
           PREV_TAG: ${{ steps.get_prev_tag.outputs.PREV_TAG }}
