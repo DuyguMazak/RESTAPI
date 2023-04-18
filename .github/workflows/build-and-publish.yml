@@ -25,9 +25,9 @@ jobs:
       - name: Build and push Docker image
         if: steps.skip_ci.outputs.skip != 'true'
         run: |
-          docker build -t docker.pkg.github.com/<github_username>/<repo_name>/<package_name>:${{ steps.increment_version.outputs.version }} .
-          docker login -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }} docker.pkg.github.com
-          docker push docker.pkg.github.com/<github_username>/<repo_name>/<package_name>:${{ steps.increment_version.outputs.version }}
+          docker build -t docker.pkg.github.com/duygumazak/restapi/myimage:${{ steps.increment_version.outputs.version }} .
+          docker login -u ${{ github.actor }} -p ${{ secrets.PASSWORD }} docker.pkg.github.com
+          docker push docker.pkg.github.com/duygumazak/restapi/myimage:${{ steps.increment_version.outputs.version }}
       - name: Create Release
         if: steps.skip_ci.outputs.skip != 'true'
         uses: actions/create-release@v1.0.0
