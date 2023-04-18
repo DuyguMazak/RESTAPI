@@ -34,9 +34,11 @@ jobs:
         if: steps.skip_ci.outputs.skip != 'true'
         uses: actions/create-release@v1.0.0
         env:
-          GITHUB_TOKEN: ${{ secrets.PASSWORD}}
+          GITHUB_TOKEN: ${{ secrets.PASSWORD }}
         with:
           tag_name: ${{ steps.increment_version.outputs.version }}
           release_name: Release ${{ steps.increment_version.outputs.version }}
+          body: |
+            This is a new release.
           draft: false
           prerelease: false
