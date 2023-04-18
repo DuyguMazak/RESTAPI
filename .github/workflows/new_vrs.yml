@@ -37,6 +37,5 @@ jobs:
         with:
           tag_name: ${{ steps.increment_version.outputs.version }}
           release_name: Release ${{ steps.increment_version.outputs.version }}
-          body: This is a new release.
           draft: false
           prerelease: false
