@@ -34,6 +34,7 @@ jobs:
           docker build -t docker.pkg.github.com/duygumazak/restapi/myimage:${{ steps.increment_version.outputs.version }} .
           docker push docker.pkg.github.com/duygumazak/restapi/myimage:${{ steps.increment_version.outputs.version }}
       - name: Create Release
+      
         if: steps.skip_ci.outputs.skip != 'true'
         uses: actions/create-release@v1.0.0
         env:
