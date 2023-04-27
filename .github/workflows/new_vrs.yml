@@ -17,7 +17,8 @@ jobs:
       - name: Increment version
         id: increment_version
         run: |
-          VERSION=$(echo ${{ steps.current_tag.outputs.tag }} | awk -F'[.-]' '{ printf "%d.%d.%d", $1, $2, $3 + 1 }')
+          VERSION=$(echo ${{ steps.current_tag.outputs.tag }} | awk -F'[.-]' -v OFS='.' '
+            { $NF = $NF + 1; printf "%d%s%d%s%d", $1, OFS, $2, OFS, $3 }')
           echo "::set-output name=version::$VERSION"
       - name: Check for [skip ci]
         id: skip_ci
