@@ -21,8 +21,6 @@ jobs:
               print
           }')
           echo "::set-output name=version::$VERSION"
-          echo "Last tag: $LAST_TAG"
-          echo "Incremented version: $VERSION"
       - name: Check for [skip ci]
         id: skip_ci
         run: echo "::set-output name=skip::$(if [[ $(git log -1 --pretty=%B) =~ \[skip\ ci\] ]]; then echo true; else echo false; fi)"
@@ -46,4 +44,5 @@ jobs:
           tag_name: ${{ steps.increment_version.outputs.version }}
           release_name: Release ${{ steps.increment_version.outputs.version }}
           draft: false
+          
           prerelease: false
