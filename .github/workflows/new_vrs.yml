@@ -44,3 +44,5 @@ jobs:
           release_name: Release ${{ steps.increment_version.outputs.version }}
           draft: false
           prerelease: false
+
+          
