@@ -16,16 +16,14 @@ jobs:
       - name: Increment version
         id: increment_version
         run: |
-          LAST_TAG=$(git describe --abbrev=0 --tags || echo "v0.0.0")
-          VERSION=$(echo "$LAST_TAG" | awk -F'[.-]' -v OFS='.' -v n=2 '{
-              $n = sprintf("%0*d", length($n), ++n);
-              for (i=n+1; i<=NF; ++i) $i=0;
-              print
-          }')
+          LAST_TAG=$(git describe --abbrev=0 --tags | sed 's/v//g' || echo "0.0.0")
+          MAJOR=$(echo "$LAST_TAG" | awk -F'[.-]' '{print $1}')
+          MINOR=$(echo "$LAST_TAG" | awk -F'[.-]' '{print $2}')
+          PATCH=$(echo "$LAST_TAG" | awk -F'[.-]' '{print $3}')
+          VERSION="$MAJOR.$MINOR.$((PATCH+1))"
           echo "::set-output name=version::$VERSION"
           echo "Last tag: $LAST_TAG"
           echo "incremented version: $VERSION"
-
       - name: Check for [skip ci]
         id: skip_ci
         run: echo "::set-output name=skip::$(if [[ $(git log -1 --pretty=%B) =~ \[skip\ ci\] ]]; then echo true; else echo false; fi)"
@@ -49,5 +47,4 @@ jobs:
           tag_name: ${{ steps.increment_version.outputs.version }}
           release_name: Release ${{ steps.increment_version.outputs.version }}
           draft: false
-          
           prerelease: false
