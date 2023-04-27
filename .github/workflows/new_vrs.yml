@@ -14,7 +14,7 @@ jobs:
       - name: Increment version
         id: increment_version
         run: |
-          LAST_TAG=$(git describe --abbrev=0 --tags || echo "v0.0.0")
+          LAST_TAG=$(git describe --abbrev=0 --tags || echo "v0.0.1")
           VERSION=$(echo "$LAST_TAG" | awk -F'[.-]' -v OFS='.' -v n=2 '{
               $n = sprintf("%0*d", length($n), ++n);
               for (i=n+1; i<=NF; ++i) $i=0;
