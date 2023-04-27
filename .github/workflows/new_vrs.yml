@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-dept:0
       - name: Increment version
         id: increment_version
         run: |
@@ -23,6 +25,7 @@ jobs:
           echo "::set-output name=version::$VERSION"
           echo "Last tag: $LAST_TAG"
           echo "incremented version: $VERSION"
+
       - name: Check for [skip ci]
         id: skip_ci
         run: echo "::set-output name=skip::$(if [[ $(git log -1 --pretty=%B) =~ \[skip\ ci\] ]]; then echo true; else echo false; fi)"
