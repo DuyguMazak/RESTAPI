@@ -11,14 +11,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Get current tag
-        id: current_tag
-        run: echo "::set-output name=tag::$(git describe --abbrev=0 --tags)"
       - name: Increment version
         id: increment_version
         run: |
-          VERSION=$(echo ${{ steps.current_tag.outputs.tag }} | awk -F'[.-]' -v OFS='.' '
-            { $NF = $NF + 1; printf "%d%s%d%s%d", $1, OFS, $2, OFS, $3 }')
+          LAST_TAG=$(git describe --abbrev=0 --tags || echo "v0.0.0")
+          VERSION=$(echo "$LAST_TAG" | awk -F'[.-]' -v OFS='.' -v n=2 '{
+              $n = sprintf("%0*d", length($n), ++n);
+              for (i=n+1; i<=NF; ++i) $i=0;
+              print
+          }')
           echo "::set-output name=version::$VERSION"
       - name: Check for [skip ci]
         id: skip_ci
@@ -35,7 +36,6 @@ jobs:
           docker build -t docker.pkg.github.com/duygumazak/restapi/myimage:${{ steps.increment_version.outputs.version }} .
           docker push docker.pkg.github.com/duygumazak/restapi/myimage:${{ steps.increment_version.outputs.version }}
       - name: Create Release
-      
         if: steps.skip_ci.outputs.skip != 'true'
         uses: actions/create-release@v1.0.0
         env:
@@ -45,5 +45,3 @@ jobs:
           release_name: Release ${{ steps.increment_version.outputs.version }}
           draft: false
           prerelease: false
-
-          
